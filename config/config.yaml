@@ -1,0 +1,19 @@
+resources: "resources.yaml"
+samples: "samples.tsv"
+units: "units.tsv"
+
+modules:
+  prealignment: "master"
+  parabricks: "main"
+
+default_container: "docker://marrip/common:1.1.1"
+
+reference:
+  fasta: ""
+
+cnvkit_access:
+  container: "docker://marrip/cnvkit:0.9.9"
+  min_gap_size: 10000
+
+cnvkit_batch_pon:
+  container: "docker://marrip/cnvkit:0.9.9"
