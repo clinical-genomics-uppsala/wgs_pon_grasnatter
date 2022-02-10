@@ -1,0 +1,41 @@
+__author__ = "Martin Rippin"
+__copyright__ = "Copyright 2021, Martin Rippin"
+__email__ = "martin.rippin@igp.uu.se"
+__license__ = "GPL-3"
+
+
+include: "rules/common.smk"
+include: "rules/cnvkit.smk"
+
+
+rule all:
+    input:
+        unpack(compile_output_list),
+
+
+module parabricks:
+    snakefile:
+        github(
+            "hydra-genetics/parabricks",
+            path="workflow/Snakefile",
+            tag=config["modules"]["parabricks"],
+        )
+    config:
+        config
+
+
+use rule * from parabricks as parabricks_*
+
+
+module prealignment:
+    snakefile:
+        github(
+            "hydra-genetics/prealignment",
+            path="workflow/Snakefile",
+            tag=config["modules"]["prealignment"],
+        )
+    config:
+        config
+
+
+use rule * from prealignment as prealignment_*
